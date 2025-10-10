@@ -1,56 +1,38 @@
 import "dotenv/config";
 import express from "express";
-import fetch from "node-fetch";
 import cors from "cors";
+import OpenAI from "openai";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Load your Hugging Face API key from environment variables
-const HF_API_KEY = process.env.HF_API_KEY;
-
-// The model we'll use — small and efficient
-const MODEL_URL = "https://api-inference.huggingface.co/models/microsoft/Phi-3-mini-128k-instruct";
-
-app.get("/", (req, res) => {
-  res.send("TRL Bridge is running!");
+const client = new OpenAI({
+  baseURL: "https://router.huggingface.co/v1",
+  apiKey: process.env.HF_API_KEY,
 });
 
+// test endpoint for your Wix site to call
 app.post("/chat", async (req, res) => {
-  const { prompt } = req.body;
-  if (!prompt) return res.status(400).send("Missing 'prompt'");
-
   try {
-    const response = await fetch(MODEL_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.HF_API_KEY}`,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ inputs: prompt })
+    const { prompt } = req.body;
+
+    const chatCompletion = await client.chat.completions.create({
+      model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
     });
 
-    const textBody = await response.text(); // read raw text
-
-    // Try to parse JSON if possible
-    let data;
-    try {
-      data = JSON.parse(textBody);
-    } catch {
-      return res.status(response.status).send(`Hugging Face API error: ${textBody}`);
-    }
-
-    // Extract generated text
-    let output = "";
-    if (Array.isArray(data) && data[0]?.generated_text) output = data[0].generated_text;
-    else if (data.generated_text) output = data.generated_text;
-    else output = JSON.stringify(data);
-
-    res.send(output);
+    res.json({
+      reply: chatCompletion.choices[0].message.content,
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).send("Error contacting Hugging Face API");
+    console.error("Error:", err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
