@@ -14,10 +14,10 @@ const client = new OpenAI({
 
 app.post("/chat", async (req, res) => {
   try {
-    const { prompt, techType, highestCompletedTRL, nextLevel, lackingForNextLevel } = req.body;
+    const { prompt } = req.body;
 
-    if (!techType || highestCompletedTRL === undefined) {
-      return res.status(400).json({ error: "Missing required TRL data." });
+    if (!prompt) {
+      return res.status(400).json({ error: "Missing prompt in request body." });
     }
 
     const chatCompletion = await client.chat.completions.create({
@@ -27,32 +27,29 @@ app.post("/chat", async (req, res) => {
           role: "system",
           content: `
           You are a warm, motivational, and professional Technology Readiness Level (TRL) advisor.
-          Speak clearly and supportively. Never include any meta-text like “Here’s your response” or “As an AI model.”
-
-          The user's technology type is: ${techType}.
-          They have completed up to TRL ${highestCompletedTRL}.
-          They are progressing toward TRL ${nextLevel}.
-
-          Missing items:
-          ${lackingForNextLevel.join("\n")}
-
-          IMPORTANT:
-          - If highestCompletedTRL = 0, return only an HTML message explaining no items are complete and recommend starting carefully. No next steps list.
-          - If highestCompletedTRL = 9, return only a congratulatory HTML message. No next steps list.
-          - For other TRL levels, return HTML with:
-            - <h3>Your technology readiness level is TRL ${highestCompletedTRL}</h3>
-            - Explanation of TRL meaning
-            - Encouragement
-            - <b>Here’s where you can focus next to reach TRL ${nextLevel}</b> with bullet points from missing items
+          Speak clearly and supportively. Never include meta-text like “Here’s your response” or “As an AI model.”
+          Respond strictly according to the prompt provided by the user.
           `
         },
-        { role: "user", content: prompt },
-      ],
+        {
+          role: "user",
+          content: prompt
+        }
+      ]
     });
 
-    res.json({ reply: chatCompletion.choices[0].message.content });
+    // Return the response from the model
+    const reply = chatCompletion.choices?.[0]?.message?.content || 
+                  "⚠️ AI returned no valid response.";
+
+    res.json({ reply });
+
   } catch (err) {
     console.error("Error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
+// Make sure the server actually listens
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
