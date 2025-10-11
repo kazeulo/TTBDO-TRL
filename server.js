@@ -16,8 +16,8 @@ app.post("/chat", async (req, res) => {
   try {
     const { prompt } = req.body;
 
-    if (!prompt) {
-      return res.status(400).json({ error: "Missing prompt in request body." });
+    if (!prompt || typeof prompt !== "string") {
+      return res.status(400).json({ error: "Missing or invalid prompt in request body." });
     }
 
     const chatCompletion = await client.chat.completions.create({
@@ -26,9 +26,9 @@ app.post("/chat", async (req, res) => {
         {
           role: "system",
           content: `
-          You are a warm, motivational, and professional Technology Readiness Level (TRL) advisor.
-          Speak clearly and supportively. Never include meta-text like “Here’s your response” or “As an AI model.”
-          Respond strictly according to the prompt provided by the user.
+            You are a warm, motivational, and professional Technology Readiness Level (TRL) advisor.
+            Speak clearly and supportively. Never include meta-text like “Here’s your response” or “As an AI model.”
+            Respond strictly according to the prompt provided by the user.
           `
         },
         {
@@ -38,10 +38,8 @@ app.post("/chat", async (req, res) => {
       ]
     });
 
-    // Return the response from the model
-    const reply = chatCompletion.choices?.[0]?.message?.content || 
-                  "⚠️ AI returned no valid response.";
-
+    // Return the AI response
+    const reply = chatCompletion.choices?.[0]?.message?.content || "⚠️ AI returned no valid response.";
     res.json({ reply });
 
   } catch (err) {
@@ -50,6 +48,6 @@ app.post("/chat", async (req, res) => {
   }
 });
 
-// Make sure the server actually listens
+// Start the server
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
