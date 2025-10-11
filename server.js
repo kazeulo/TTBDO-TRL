@@ -12,30 +12,21 @@ const client = new OpenAI({
   apiKey: process.env.HF_API_KEY,
 });
 
-// testing end point
 app.post("/chat", async (req, res) => {
   try {
     const { prompt } = req.body;
-    console.log("🟢 Received prompt:", prompt);
 
     const chatCompletion = await client.chat.completions.create({
       model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
-      messages: [
-        { role: "user", content: prompt },
-      ],
+      messages: [{ role: "user", content: prompt }],
     });
 
-    console.log("🟣 HF Response:", JSON.stringify(chatCompletion, null, 2));
-
-    const reply = chatCompletion?.choices?.[0]?.message?.content;
-
-    if (!reply) {
-      return res.json({ reply: "⚠️ Model returned no text." });
-    }
-
-    res.json({ reply });
+    res.json({ reply: chatCompletion.choices[0].message.content });
   } catch (err) {
-    console.error("❌ Error:", err);
+    console.error("Error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
+
+const PORT = process.env.PORT || 10000;
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
