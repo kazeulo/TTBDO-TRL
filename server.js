@@ -15,7 +15,6 @@ const client = new OpenAI({
 app.post("/chat", async (req, res) => {
   try {
     const { prompt } = req.body;
-
     if (!prompt || typeof prompt !== "string") {
       return res.status(400).json({ error: "Missing or invalid prompt in request body." });
     }
@@ -29,25 +28,38 @@ app.post("/chat", async (req, res) => {
             You are a warm, motivational, and professional Technology Readiness Level (TRL) advisor.
             Speak clearly and supportively. Never include meta-text like “Here’s your response” or “As an AI model.”
             Respond strictly according to the prompt provided by the user.
-          `
+          `,
         },
-        {
-          role: "user",
-          content: prompt
-        }
-      ]
+        { role: "user", content: prompt },
+      ],
     });
 
-    // Return the AI response
-    const reply = chatCompletion.choices?.[0]?.message?.content || "⚠️ AI returned no valid response.";
+    const reply = chatCompletion.choices?.[0]?.message?.content || "AI returned no valid response.";
     res.json({ reply });
-
   } catch (err) {
     console.error("Error:", err.message);
     res.status(500).json({ error: err.message });
   }
 });
 
-// Start the server
+// Wake-up route
+app.get("/", (req, res) => {
+  res.send("Server is awake and running!");
+});
+
+// Preload AI model on startup
+(async () => {
+  try {
+    console.log("Preloading model...");
+    await client.chat.completions.create({
+      model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
+      messages: [{ role: "user", content: "Hello" }],
+    });
+    console.log("✅ Model preloaded and ready!");
+  } catch (err) {
+    console.error("⚠️ Model preload failed:", err.message);
+  }
+})();
+
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
