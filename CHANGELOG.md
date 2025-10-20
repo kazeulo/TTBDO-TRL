@@ -1,4 +1,4 @@
-## [1.0] - 2025-10-20
+## [1.0.0] - 2025-10-20
 ### Initial Release
 - Launched the **UPV TTBDO TRL Assessment System**.
 - **5 main assessment categories**:
