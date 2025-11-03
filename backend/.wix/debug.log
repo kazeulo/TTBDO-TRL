@@ -1,0 +1,20 @@
+----- CLI crash report at 2025-11-03T12:03:47.760Z
+Error Trace
+FailedToIdentifyProgramFlow: FailedToIdentifyProgramFlow
+    at _Command.<anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\@wix\cli\src\program.ts:76:15)
+    at _Command.emit (node:events:519:28)
+    at _Command._parseCommand (C:\Users\ASUS\AppData\Roaming\npm\node_modules\node_modules\commander\lib\command.js:1607:14)
+    at _Command.parseAsync (C:\Users\ASUS\AppData\Roaming\npm\node_modules\node_modules\commander\lib\command.js:1104:16)
+    at <anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\@wix\cli\src\index.tsx:88:39)
+Error Info
+{}
+----- CLI crash report at 2025-11-03T12:03:50.812Z
+Error Trace
+FailedToIdentifyProgramFlow: FailedToIdentifyProgramFlow
+    at _Command.<anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\@wix\cli\src\program.ts:76:15)
+    at _Command.emit (node:events:519:28)
+    at _Command._parseCommand (C:\Users\ASUS\AppData\Roaming\npm\node_modules\node_modules\commander\lib\command.js:1607:14)
+    at _Command.parseAsync (C:\Users\ASUS\AppData\Roaming\npm\node_modules\node_modules\commander\lib\command.js:1104:16)
+    at <anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\@wix\cli\src\index.tsx:88:39)
+Error Info
+{}

@@ -8,9 +8,9 @@ app.use(cors());
 app.use(express.json());
 
 const client = new OpenAI({
-  // baseURL: "https://router.huggingface.co/v1",
-  baseURL: "https://openrouter.ai/api/v1",
-  apiKey: process.env.OR_API_KEY,
+  baseURL: "https://router.huggingface.co/v1",
+  // baseURL: "https://openrouter.ai/api/v1",
+  apiKey: process.env.HF_API_KEY,
 });
 
 app.post("/chat", async (req, res) => {
