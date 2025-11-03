@@ -9,4 +9,4 @@
   - Regulatory Compliance Status
 - Implemented question navigation, progress tracking, and category-based sequencing.
 - Added **TRL level computation** and **recommendation generation**.
-- **Logic:** Utilizes a **sequential checking system**, where each TRL level must be fully completed before progressing to the next.
+- **Logic:** Utilizes a **sequential checking system**, where each TRL level must be fully completed before progressing to the next.5
