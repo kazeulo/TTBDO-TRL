@@ -28,3 +28,13 @@ FailedToIdentifyProgramFlow: FailedToIdentifyProgramFlow
     at <anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\@wix\cli\src\index.tsx:88:39)
 Error Info
 {}
+----- CLI crash report at 2025-11-27T22:01:09.905Z
+Error Trace
+FailedToIdentifyProgramFlow: FailedToIdentifyProgramFlow
+    at _Command.<anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\@wix\cli\src\program.ts:76:15)
+    at _Command.emit (node:events:519:28)
+    at _Command._parseCommand (C:\Users\ASUS\AppData\Roaming\npm\node_modules\node_modules\commander\lib\command.js:1607:14)
+    at _Command.parseAsync (C:\Users\ASUS\AppData\Roaming\npm\node_modules\node_modules\commander\lib\command.js:1104:16)
+    at <anonymous> (C:\Users\ASUS\AppData\Roaming\npm\node_modules\@wix\cli\src\index.tsx:88:39)
+Error Info
+{}
