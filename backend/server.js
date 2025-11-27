@@ -21,7 +21,8 @@ app.post("/chat", async (req, res) => {
     }
 
     const chatCompletion = await client.chat.completions.create({
-      model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
+      // model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
+      model: "meta-llama/Llama-3.1-8B-Instruct:cerebras",
       messages: [
         {
           role: "system",
