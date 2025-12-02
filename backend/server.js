@@ -22,7 +22,8 @@ app.post("/chat", async (req, res) => {
 
     const chatCompletion = await client.chat.completions.create({
       // model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
-      model: "meta-llama/Llama-3.1-8B-Instruct:cerebras",
+      // model: "meta-llama/Llama-3.1-8B-Instruct:cerebras",
+      model: "Qwen/Qwen2.5-72B-Instruct:novita",
       messages: [
         {
           role: "system",
@@ -54,7 +55,8 @@ app.get("/", (req, res) => {
   try {
     console.log("Preloading model...");
     await client.chat.completions.create({
-      model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
+      // model: "meta-llama/Llama-3.1-8B-Instruct:fireworks-ai",
+      model: "Qwen/Qwen2.5-72B-Instruct:novita",
       messages: [{ role: "user", content: "Hello" }],
     });
     console.log("✅ Model preloaded and ready!");
