@@ -18,32 +18,40 @@
 ## [1.2.0] – 2025-11-27
 ### Major Update — Front-End Migration & Logic Revision
 
-#### 🔧 Front-End / UI Improvements
+#### Front-End / UI Improvements
 - Migrated platform from **Wix Editor → Wix Studio**.
 - Rebuilt UI using Studio’s **responsive flex-layout system**.
 - Converted all pages and sections to use **responsive containers**, improving mobile and tablet compatibility.
 - Updated repeaters, navigation panels, and category layouts to support Studio's adaptive design tools.
 - Improved accessibility (scalable typography, better contrast, semantic structure).
 
-#### 🚀 Navigation & Interaction Enhancements
+#### Navigation & Interaction Enhancements
 - Updated multi-page question navigation for improved responsiveness.
 - Refactored button placement using Studio’s adaptive layout (no more fixed/absolute positioning).
 - Enhanced progress tracking and category transitions for smoother user flow.
 
-#### 🧠 Assessment Logic Enhancements
+#### Assessment Logic Enhancements
 - Refactored TRL evaluation to match Studio’s updated data-binding behavior.
 - Improved sequential TRL verification to avoid inconsistent state transitions.
 - Added validation requiring **at least one checked item in "Technology Status"** before proceeding.
 - Strengthened cross-category consistency checks to improve result accuracy.
 
-#### 🗄️ Data & Storage Changes
+#### Data & Storage Changes
 - Unified answer-tracking with a new global state handler compatible with Studio’s repeater lifecycle.
 - Improved session storage usage for faster and more stable category switching.
 - Updated Render server wake-up routines and backend compatibility.
 
-#### 🔒 Stability & Error Handling
+#### Stability & Error Handling
 - Added error handling for missing or empty categories.
 - Improved user-facing messages when required selections are missing.
 - General optimizations and code cleanup.
 
 ---
+
+## [1.2.1] – 2025-11-12
+### Minor Update — Refactored some logics
+
+#### AI server
+- Removed render dependency when fetching hugging face endpoint
+- Integrated AI server directly to the frontend (wix)
+- Improved html consistency for AI prompts
