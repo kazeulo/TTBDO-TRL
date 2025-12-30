@@ -5,7 +5,7 @@ It provides structured assessment categories and generates actionable recommenda
 
 ---
 
-## 🚀 Features
+## Features
 
 - **Comprehensive TRL Assessment** – Evaluate technologies across five key readiness categories:
   - Technology Status  
@@ -18,12 +18,19 @@ It provides structured assessment categories and generates actionable recommenda
 
 ---
 
-## 🧩 Purpose
+## Purpose
 
 This system aims to **bridge the gap between innovation and market readiness**, helping researchers and startups understand where they are in the TRL spectrum — and what to do next.
 
 ---
 
-## 🏁 Version History
+## Tech Stack
+
+- Wix
+- Hugging Face
+
+---
+
+## Version History
 
 See [CHANGELOG.md](CHANGELOG.md) for version updates and feature progress.
