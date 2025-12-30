@@ -36,11 +36,6 @@
 - Added validation requiring **at least one checked item in "Technology Status"** before proceeding.
 - Strengthened cross-category consistency checks to improve result accuracy.
 
-#### Data & Storage Changes
-- Unified answer-tracking with a new global state handler compatible with Studio’s repeater lifecycle.
-- Improved session storage usage for faster and more stable category switching.
-- Updated Render server wake-up routines and backend compatibility.
-
 #### Stability & Error Handling
 - Added error handling for missing or empty categories.
 - Improved user-facing messages when required selections are missing.
