@@ -4,6 +4,14 @@
 
 The system consists of a Wix-based frontend application, a structured assessment engine, and an AI-powered recommendation layer powered by Hugging Face models.
 
+### Main overview
+
+![alt text](<diagrams/TRLars main diagram.png>)
+
+### Assessment flow
+
+[text](architecture.md) ![text](diagrams/assessment-flow.png)
+
 ## System Components
 
 ### Frontend (Wix Application)
